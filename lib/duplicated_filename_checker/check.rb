@@ -1,33 +1,42 @@
-require 'digest/md5'
-
 class DuplicatedFilenameChecker::Check
-  def initialize(*survey_direcotry_paths)
-    @survey_direcotry_paths = survey_direcotry_paths.map{|path| File.absolute_path path }
+  def initialize(*survey_direcotry_roots)
+    set_survey_target_paths_by!(survey_direcotry_roots)
   end
 
   def execute
-    @file_paths = []
-    @survey_direcotry_paths.each do |root|
-      unless File.exist?(root)
-        raise "No such file or directory: #{root}"
-      end
+    duplicate_paths.group_by(&:basename)
+  end
 
-      Dir.glob("#{root}/**/*.*").each do |path|
-        @file_paths << DuplicatedFilenameChecker::FileProfile.new(path)
-      end
+  private
+
+  def duplicate_paths
+    @survey_target_paths.select do |path|
+      is_duplicate?(path.basename)
     end
+  end
 
-    # 重複を探す
-    duplicate_file_paths = []
+  def is_duplicate?(basename)
+    survey_paths_basename_list.count(basename) > 1
+  end
 
-    @file_paths.each do |path|
-      @file_base_names ||= @file_paths.map(&:basename) # メモ化
+  # baseames of survey_paths. it list is not uniq.
+  # @example ['basename1', 'basename1', 'basename2', 'basename3']
+  def survey_paths_basename_list
+    @basename_list ||= @survey_target_paths.map(&:basename) #memorize
+  end
 
-      if @file_base_names.count(path.basename) > 1 # duplicate
-        duplicate_file_paths << path
-      end
-    end
+  def set_survey_target_paths_by!(root_paths)
+    paths = survey_paths_by(root_paths)
+    @survey_target_paths = paths.map{|path| to_file_profile(path) }
+  end
 
-    duplicate_file_paths.group_by(&:basename)
+  def survey_paths_by(survey_direcotry_roots)
+    survey_direcotry_roots.map do |root|
+      Dir.glob("#{root}/**/*.*")
+    end.flatten
+  end
+
+  def to_file_profile(path)
+    DuplicatedFilenameChecker::FileProfile.new(path)
   end
 end

@@ -14,7 +14,10 @@ duplicated_file_profiles.each do |basename, file_profiles|
 
   file_profiles.each do |file_profile|
     puts "#{file_profile.path}"
+    puts " * md5: #{file_profile.md5_digest}"
+    puts " * mtime: #{file_profile.stat.mtime}"
+    puts "\n" unless file_profile == file_profiles.last
   end
 
-  puts "\n"
+  puts "\n\n"
 end

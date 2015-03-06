@@ -1,14 +1,26 @@
 #!/usr/bin/env ruby
 require 'duplicated_filename_checker'
+require 'optparse'
 
+# check argument
 unless ARGV.size > 0
   raise ArgumentError.new('Specify the argument. Argument is survey target root paths.')
 end
 
+# survey
 servey_root_paths = ARGV
 duplicated_file_profiles = DuplicatedFilenameChecker::Check.new(*servey_root_paths).execute
 
+# options
+options = ARGV.getopts("i:")
+ignore_keyword = options["i"]
+
+# formatting
 duplicated_file_profiles.each do |basename, file_profiles|
+  if ignore_keyword
+    next if basename =~ Regexp.new(ignore_keyword)
+  end
+
   puts "## #{basename}"
 
   file_profiles.each.with_index(1) do |file_profile, index|

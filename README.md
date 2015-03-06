@@ -88,3 +88,7 @@ p duplicate_file_profiles[0].path
 p duplicate_file_profiles[1].path
 #=> /Users/shinya131/survey_dir2_root/subdirectory/dupfilename1.png
 ```
+
+## TODO
+ * Performance tune.
+ * Flexible ignore options.

@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = DuplicatedFilenameChecker::VERSION
   spec.authors       = ["Shinya131"]
   spec.email         = ["nagai3mt5b@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = "This gem is check duplicated filename in multiple directory."
+  spec.description   = "duplicated_filename_checker is check duplicated filename in multiple directory with subdirectory."
+  spec.homepage      = "https://github.com/Shinya131/duplicated_filename_checker"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

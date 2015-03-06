@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 class DuplicatedFilenameChecker; end
-require '../lib/duplicated_filename_checker/check.rb'
-require '../lib/duplicated_filename_checker/file_profile.rb'
+require 'duplicated_filename_checker'
 
 unless ARGV.size > 0
   raise ArgumentError.new('Specify the argument. Argument is survey target root paths.')

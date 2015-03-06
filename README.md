@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/duplicated_filename_checker.svg)](http://badge.fury.io/rb/duplicated_filename_checker)
 [![Build Status](https://travis-ci.org/Shinya131/duplicated_filename_checker.svg?branch=master)](https://travis-ci.org/Shinya131/duplicated_filename_checker)
 [![Coverage Status](https://coveralls.io/repos/Shinya131/duplicated_filename_checker/badge.svg?branch=master)](https://coveralls.io/r/Shinya131/duplicated_filename_checker?branch=master) 
 [![Code Climate](https://codeclimate.com/github/Shinya131/duplicated_filename_checker/badges/gpa.svg)](https://codeclimate.com/github/Shinya131/duplicated_filename_checker)

@@ -32,7 +32,7 @@ $ dup-filename ./survey_dir1_root ./survey_dir2_root
  * md5: 5f524466f49b96221fe7c5a6ddf5d881
  * mtime: 2014-10-16 20:19:07 +0900
 
-2. /Users/shinya131/survey_dir1_root/dupfilename2.png
+2. /Users/shinya131/survey_dir2_root/dupfilename2.png
  * md5: 5ca13f9af7db4c8e80ac153fd4c0a552
  * mtime: 2015-03-03 15:14:35 +0900
 

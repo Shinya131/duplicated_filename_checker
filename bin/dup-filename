@@ -13,8 +13,8 @@ duplicated_file_profiles = DuplicatedFilenameChecker::Check.new(*servey_root_pat
 duplicated_file_profiles.each do |basename, file_profiles|
   puts "## #{basename}"
 
-  file_profiles.each do |file_profile|
-    puts "#{file_profile.path}"
+  file_profiles.each.with_index(1) do |file_profile, index|
+    puts "#{index}. #{file_profile.path}"
     puts " * md5: #{file_profile.md5_digest}"
     puts " * mtime: #{file_profile.stat.mtime}"
     puts "\n"

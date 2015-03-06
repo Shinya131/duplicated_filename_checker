@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
-
-require 'duplicated_filename_checker'
+class DuplicatedFilenameChecker; end
+require '../lib/duplicated_filename_checker/check.rb'
+require '../lib/duplicated_filename_checker/file_profile.rb'
 
 unless ARGV.size > 0
   raise ArgumentError.new('Specify the argument. Argument is survey target root paths.')
@@ -16,8 +17,8 @@ duplicated_file_profiles.each do |basename, file_profiles|
     puts "#{file_profile.path}"
     puts " * md5: #{file_profile.md5_digest}"
     puts " * mtime: #{file_profile.stat.mtime}"
-    puts "\n" unless file_profile == file_profiles.last
+    puts "\n"
   end
 
-  puts "\n\n"
+  puts "\n"
 end

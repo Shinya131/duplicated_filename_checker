@@ -1,5 +1,5 @@
 require "duplicated_filename_checker/version"
 
 module DuplicatedFilenameChecker
-  # Your code goes here...
+  require 'duplicated_filename_checker/file_profile'
 end

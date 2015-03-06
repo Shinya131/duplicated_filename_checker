@@ -1,0 +1,2 @@
+class DuplicatedFilenameChecker::FileProfile
+end

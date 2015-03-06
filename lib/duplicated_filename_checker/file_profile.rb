@@ -16,4 +16,8 @@ class DuplicatedFilenameChecker::FileProfile
   def md5_digest
     Digest::MD5.file(path).to_s
   end
+
+  def stat
+    File.stat path
+  end
 end

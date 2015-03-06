@@ -21,4 +21,8 @@ class TestFileProfile < MiniTest::Unit::TestCase
   def test_md5_digest
     assert @file_profile.md5_digest == @sample_md5_digest
   end
+
+  def test_stat
+    assert @file_profile.stat.class == File::Stat
+  end
 end

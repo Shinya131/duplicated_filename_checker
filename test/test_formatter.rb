@@ -1,7 +1,7 @@
 require 'minitest_helper'
 
-class TestCheck < MiniTest::Unit::TestCase
-  def setup
+describe DuplicatedFilenameChecker::Formatter do
+  before do
     survey_dir_path_1 = './test/sample_for_test/dir_a1'
     survey_dir_path_2 = './test/sample_for_test/dir_b1'
     @sample_filename  = 'duplicate_filename.sample'
@@ -10,11 +10,9 @@ class TestCheck < MiniTest::Unit::TestCase
     @formatter = DuplicatedFilenameChecker::Formatter.new(@check_result)
   end
 
-  def test
-    assert true
+  describe '#only_basename' do
+    it 'result only duplicate basename' do
+      assert @formatter.only_basename == ['duplicatefilename.sample']
+    end
   end
-
-  # def test_only_basename
-  #   assert @formatter.only_basename == ['duplicatefilename.sample']
-  # end
 end

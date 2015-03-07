@@ -46,8 +46,8 @@ describe DuplicatedFilenameChecker::Formatter do
     end
 
     it 'ignored specified basename' do
-      assert @formatter.only_basename == []
-      assert @formatter.hash == {}
+      assert @formatter.only_basename == ['duplicate_filename_2.png']
+      assert @formatter.hash.keys == ['duplicate_filename_2.png']
     end
   end
 end

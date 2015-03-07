@@ -41,7 +41,7 @@ class DuplicatedFilenameChecker::Formatter
     end
 
     @duplicate_file_profiles.select do |basename, _|
-      !basename =~ Regexp.new(@exclude_basename_regexp)
+      !(basename =~ Regexp.new(@exclude_basename_regexp))
     end
   end
 

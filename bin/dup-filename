@@ -4,9 +4,10 @@ require 'duplicated_filename_checker'
 require 'optparse'
 
 # read args
-options = ARGV.getopts("i:")
+options = ARGV.getopts("li:")
 
 exclude_basename = options["i"]
+only_basename = options["l"]
 servey_root_paths = ARGV
 
 # survey
@@ -18,4 +19,9 @@ result = Formatter.new(duplicated_file_profiles)
 result.exclude_basename(exclude_basename)
 
 # show
-puts result.markdown
+if only_basename
+  puts result.only_basename
+else
+  puts result.markdown
+end
+

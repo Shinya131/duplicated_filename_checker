@@ -17,13 +17,23 @@ class DuplicatedFilenameChecker::Check
   end
 
   def is_duplicate?(basename)
-    survey_paths_basename_list.count(basename) > 1
+    basename_with_count[basename] > 1
   end
 
-  # Baseames of survey_paths. It list is not uniq.
-  # @example ['basename1', 'basename1', 'basename2', 'basename3']
-  def survey_paths_basename_list
-    @basename_list ||= @survey_target_paths.map(&:basename) #memorize
+  # @return [Hash] basename with same basename count.
+  # @example { "basename_a.png" => 1, "basename_b.png" => 3, "basename_c.png" => 1 }
+  def basename_with_count
+    unless @basename_count.nil? # memorize
+      return @basename_count
+    end
+
+    @basename_count = Hash.new(0)
+
+    @survey_target_paths.each do |path|
+      @basename_count[path.basename] += 1
+    end
+
+    @basename_count
   end
 
   def survey_target_paths_by(root_paths)

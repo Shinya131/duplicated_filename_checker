@@ -1,34 +1,21 @@
 #!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'duplicated_filename_checker'
 require 'optparse'
 
-# check argument
-unless ARGV.size > 0
-  raise ArgumentError.new('Specify the argument. Argument is survey target root paths.')
-end
+# read args
+options = ARGV.getopts("i:")
+
+exclude_basename = options["i"]
+servey_root_paths = ARGV
 
 # survey
-servey_root_paths = ARGV
-duplicated_file_profiles = DuplicatedFilenameChecker::Check.new(*servey_root_paths).execute
+include DuplicatedFilenameChecker
+duplicated_file_profiles = Check.new(*servey_root_paths).execute
+result = Formatter.new(duplicated_file_profiles)
 
-# options
-options = ARGV.getopts("i:")
-ignore_keyword = options["i"]
+# filter
+result.exclude_basename(exclude_basename)
 
-# formatting
-duplicated_file_profiles.each do |basename, file_profiles|
-  if ignore_keyword
-    next if basename =~ Regexp.new(ignore_keyword)
-  end
-
-  puts "## #{basename}"
-
-  file_profiles.each.with_index(1) do |file_profile, index|
-    puts "#{index}. #{file_profile.path}"
-    puts " * md5: #{file_profile.md5_digest}"
-    puts " * mtime: #{file_profile.stat.mtime}"
-    puts "\n"
-  end
-
-  puts "\n"
-end
+# show
+puts result.markdown

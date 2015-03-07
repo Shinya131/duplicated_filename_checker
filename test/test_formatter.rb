@@ -22,6 +22,24 @@ describe DuplicatedFilenameChecker::Formatter do
     end
   end
 
+  describe '#markdown' do
+    it 'first line has ##' do
+      first_line = @formatter.markdown.split("\n")[0]
+      assert first_line =~ /##/
+    end
+
+    it 'first line has basname' do
+      first_line = @formatter.markdown.split("\n")[0]
+      assert first_line =~ /#{@sample_filename}/
+    end
+
+    it 'second line has path' do
+      second_line = @formatter.markdown.split("\n")[1]
+      duplicate_file_list = @check_result.values.first
+      assert duplicate_file_list.any?{|file| second_line =~ /#{file.path}/ }
+    end
+  end
+
   describe '#exclude_basename' do
     before do
       @formatter.exclude_basename('.sample')

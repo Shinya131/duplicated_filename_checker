@@ -4,7 +4,7 @@ describe DuplicatedFilenameChecker::Formatter do
   before do
     survey_dir_path_1 = './test/sample_for_test/dir_a1'
     survey_dir_path_2 = './test/sample_for_test/dir_b1'
-    @sample_filename  = 'duplicate_filename.sample'
+    @sample_filename  = 'duplicate_filename_1.sample'
 
     @check_result = DuplicatedFilenameChecker::Check.new(survey_dir_path_1, survey_dir_path_2).execute
     @formatter = DuplicatedFilenameChecker::Formatter.new(@check_result)
@@ -18,7 +18,7 @@ describe DuplicatedFilenameChecker::Formatter do
 
   describe '#only_basename' do
     it 'show only basenames' do
-      assert @formatter.only_basename == ['duplicate_filename.sample']
+      assert @formatter.only_basename == ['duplicate_filename_1.sample', 'duplicate_filename_2.png']
     end
   end
 

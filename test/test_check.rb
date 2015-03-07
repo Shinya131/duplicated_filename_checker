@@ -21,7 +21,7 @@ describe DuplicatedFilenameChecker::Check do
       before do
         survey_dir_path_1 = './test/sample_for_test/dir_a1'
         survey_dir_path_2 = './test/sample_for_test/dir_b1'
-        @sample_filename  = 'duplicate_filename.sample'
+        @sample_filename  = 'duplicate_filename_1.sample'
 
         @check = DuplicatedFilenameChecker::Check.new(survey_dir_path_1, survey_dir_path_2)
         @check_result = @check.execute

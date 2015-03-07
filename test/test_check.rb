@@ -26,6 +26,17 @@ class TestCheck < MiniTest::Unit::TestCase
           assert profiles.map(&:path) == profiles.map(&:path).uniq        # all path is different
         end
       end
+
+      describe 'survey target has not duplicate basename file' do
+        before do
+          @check = DuplicatedFilenameChecker::Check.new('./test/sample_for_test/dir_a1')
+          @check_result = @check.execute
+        end
+
+        it 'result is empty hash' do
+          assert @check_result == {}
+        end
+      end
     end
   end
 end

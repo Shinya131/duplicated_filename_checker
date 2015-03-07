@@ -18,6 +18,6 @@ class DuplicatedFilenameChecker::FileProfile
   end
 
   def stat
-    File.stat path
+    File.stat @file_path
   end
 end

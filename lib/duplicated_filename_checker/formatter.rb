@@ -7,6 +7,10 @@ class DuplicatedFilenameChecker::Formatter
     @exclude_basename_regexp = exclude_basename_regexp
   end
 
+  def hash
+    duplicate_file_profiles_with_filter
+  end
+
   def only_basename
     duplicate_file_profiles_with_filter.keys
   end

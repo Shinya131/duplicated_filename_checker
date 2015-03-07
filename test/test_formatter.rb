@@ -10,6 +10,12 @@ describe DuplicatedFilenameChecker::Formatter do
     @formatter = DuplicatedFilenameChecker::Formatter.new(@check_result)
   end
 
+  describe '#hash' do
+    it 'like plain result' do
+      assert @formatter.hash == @check_result
+    end
+  end
+
   describe '#only_basename' do
     it 'show only basenames' do
       assert @formatter.only_basename == ['duplicate_filename.sample']
@@ -23,6 +29,7 @@ describe DuplicatedFilenameChecker::Formatter do
 
     it 'ignored specified basename' do
       assert @formatter.only_basename == []
+      assert @formatter.hash == {}
     end
   end
 end

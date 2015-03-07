@@ -1,41 +1,49 @@
 require 'minitest_helper'
 
-class TestCheck < MiniTest::Unit::TestCase
-  describe DuplicatedFilenameChecker::Check do
-    describe '#execute' do
-      describe 'survey target has duplicate basename files' do
-        before do
-          survey_dir_path_1 = './test/sample_for_test/dir_a1'
-          survey_dir_path_2 = './test/sample_for_test/dir_b1'
-          @sample_filename  = 'duplicate_filename.sample'
+describe DuplicatedFilenameChecker::Check do
+  describe '#execute' do
+    describe 'survey target has duplicate basename files' do
+      before do
+        survey_dir_path_1 = './test/sample_for_test/dir_a1'
+        survey_dir_path_2 = './test/sample_for_test/dir_b1'
+        @sample_filename  = 'duplicate_filename.sample'
 
-          @check = DuplicatedFilenameChecker::Check.new(survey_dir_path_1, survey_dir_path_2)
-          @check_result = @check.execute
-        end
-
-        it 'key is duplicate filename' do
-          basename = @check_result.keys.first
-          assert basename == @sample_filename
-        end
-
-        it 'value is duplicate file profiles' do
-          profiles = @check_result.values.first
-
-          assert profiles.all?{ |path| path.class == DuplicatedFilenameChecker::FileProfile }
-          assert profiles.all?{ |path| path.basename == @sample_filename } # all basename is same
-          assert profiles.map(&:path) == profiles.map(&:path).uniq        # all path is different
-        end
+        @check = DuplicatedFilenameChecker::Check.new(survey_dir_path_1, survey_dir_path_2)
+        @check_result = @check.execute
       end
 
-      describe 'survey target has not duplicate basename file' do
+      it 'key is duplicate filename' do
+        basename = @check_result.keys.first
+        assert basename == @sample_filename
+      end
+
+      describe 'value is duplicate file profiles' do
         before do
-          @check = DuplicatedFilenameChecker::Check.new('./test/sample_for_test/dir_a1')
-          @check_result = @check.execute
+          @profiles = @check_result.values
         end
 
-        it 'result is empty hash' do
-          assert @check_result == {}
+        it 'prfiles is DuplicatedFilenameChecker::FileProfile' do
+          assert @profiles.flatten.all?{ |path| path.class == DuplicatedFilenameChecker::FileProfile }
         end
+
+        it 'proflies.first all basename is same' do
+          assert @profiles.first.all?{ |path| path.basename == @sample_filename }
+        end
+
+        it 'proflies.first path is different' do
+          assert @profiles.first.map(&:path) == @profiles.first.map(&:path).uniq
+        end
+      end
+    end
+
+    describe 'survey target has not duplicate basename file' do
+      before do
+        @check = DuplicatedFilenameChecker::Check.new('./test/sample_for_test/dir_a1')
+        @check_result = @check.execute
+      end
+
+      it 'result is empty hash' do
+        assert @check_result == {}
       end
     end
   end

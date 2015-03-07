@@ -21,14 +21,14 @@ describe DuplicatedFilenameChecker::Check do
       before do
         survey_dir_path_1 = './test/sample_for_test/dir_a1'
         survey_dir_path_2 = './test/sample_for_test/dir_b1'
-        @sample_filename  = 'duplicate_filename_1.sample'
+        @sample_filenames = ['duplicate_filename_1.sample', 'duplicate_filename_2.sample']
 
         @check = DuplicatedFilenameChecker::Check.new(survey_dir_path_1, survey_dir_path_2)
         @check_result = @check.execute
       end
 
       it 'key is duplicate filename' do
-        assert = @check_result.keys.any?{|basename| basename == @sample_filename }
+        assert @check_result.keys.any?{|basename| @sample_filenames.include? basename }
       end
 
       describe 'value is duplicate file profiles' do
@@ -41,7 +41,7 @@ describe DuplicatedFilenameChecker::Check do
         end
 
         it 'proflies.first all basename is same' do
-          assert @profiles.first.all?{ |path| path.basename == @sample_filename }
+          assert @profiles.first.all?{ |path| @sample_filenames.include? path.basename }
         end
 
         it 'proflies.first path is different' do

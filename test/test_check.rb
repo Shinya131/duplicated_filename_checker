@@ -21,7 +21,7 @@ describe DuplicatedFilenameChecker::Check do
       before do
         survey_dir_path_1 = './test/sample_for_test/dir_a1'
         survey_dir_path_2 = './test/sample_for_test/dir_b1'
-        @sample_filenames = ['duplicate_filename_1.sample', 'duplicate_filename_2.sample']
+        @sample_filenames = ['duplicate_filename_1.sample', 'duplicate_filename_2.png']
 
         @check = DuplicatedFilenameChecker::Check.new(survey_dir_path_1, survey_dir_path_2)
         @check_result = @check.execute
@@ -37,16 +37,20 @@ describe DuplicatedFilenameChecker::Check do
         end
 
         it 'prfiles is DuplicatedFilenameChecker::FileProfile' do
-          assert @profiles.flatten.all?{ |path| path.class == DuplicatedFilenameChecker::FileProfile }
+          @profiles.flatten.each do |path|
+            assert path.class == DuplicatedFilenameChecker::FileProfile
+          end
         end
 
         it 'proflies.first all basename is same' do
-          p @profiles
-          assert @profiles.first.all?{ |path| @sample_filenames.include? path.basename }
+          @profiles.flatten.each do |path|
+            assert @sample_filenames.include? path.basename
+          end
         end
 
         it 'proflies.first path is different' do
-          assert @profiles.first.map(&:path) == @profiles.first.map(&:path).uniq
+          paths = @profiles.flatten.map(&:path)
+          assert paths == paths.uniq
         end
       end
     end

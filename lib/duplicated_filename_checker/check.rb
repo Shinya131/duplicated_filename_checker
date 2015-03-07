@@ -1,6 +1,6 @@
 class DuplicatedFilenameChecker::Check
   def initialize(*survey_direcotry_roots)
-    @survey_target_paths =  survey_target_paths_by(survey_direcotry_roots)
+    @survey_target_paths = survey_target_paths_by(survey_direcotry_roots)
   end
 
   def execute

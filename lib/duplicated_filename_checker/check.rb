@@ -1,6 +1,6 @@
 class DuplicatedFilenameChecker::Check
-  def initialize(*survey_direcotry_roots)
-    @survey_target_paths = survey_target_paths_by(survey_direcotry_roots)
+  def initialize(*check_direcotry_roots)
+    @check_target_paths = check_target_paths_by(check_direcotry_roots)
   end
 
   def execute
@@ -9,9 +9,9 @@ class DuplicatedFilenameChecker::Check
 
   private
 
-  # select duplicate paths from survey target paths
+  # select duplicate paths from check target paths
   def duplicate_paths
-    @survey_target_paths.select do |file|
+    @check_target_paths.select do |file|
       is_duplicate?(file.basename)
     end
   end
@@ -29,14 +29,14 @@ class DuplicatedFilenameChecker::Check
 
     @basename_count = Hash.new(0)
 
-    @survey_target_paths.each do |file|
+    @check_target_paths.each do |file|
       @basename_count[file.basename] += 1
     end
 
     @basename_count
   end
 
-  def survey_target_paths_by(root_paths)
+  def check_target_paths_by(root_paths)
     # get paths in subdirectory
     paths = root_paths.map{|root| Dir.glob("#{root}/**/*.*") }.flatten
 

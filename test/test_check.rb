@@ -1,28 +1,31 @@
 require 'minitest_helper'
 
 class TestCheck < MiniTest::Unit::TestCase
-  def setup
-    survey_dir_path_1 = './test/sample_for_test/dir_a1'
-    survey_dir_path_2 = './test/sample_for_test/dir_b1'
-    @sample_filename  = 'duplicate_filename.sample'
+  describe DuplicatedFilenameChecker::Check do
+    describe '#execute' do
+      describe 'survey target has duplicate basename files' do
+        before do
+          survey_dir_path_1 = './test/sample_for_test/dir_a1'
+          survey_dir_path_2 = './test/sample_for_test/dir_b1'
+          @sample_filename  = 'duplicate_filename.sample'
 
-    @check = DuplicatedFilenameChecker::Check.new(survey_dir_path_1, survey_dir_path_2)
-  end
+          @check = DuplicatedFilenameChecker::Check.new(survey_dir_path_1, survey_dir_path_2)
+          @check_result = @check.execute
+        end
 
-  def test_execute
-    duplicate_file_paths = @check.execute
+        it 'key is duplicate filename' do
+          basename = @check_result.keys.first
+          assert basename == @sample_filename
+        end
 
-    assert(duplicate_file_paths.class == Hash)
+        it 'value is duplicate file profiles' do
+          profiles = @check_result.values.first
 
-    # key is duplicate filename
-    basename = duplicate_file_paths.keys.first
-    assert(basename == @sample_filename)
-
-    # value is duplicate file paths
-    filepaths = duplicate_file_paths.values.first
-
-    assert filepaths.all?{ |path| path.class == DuplicatedFilenameChecker::FileProfile }
-    assert filepaths.all?{ |path| path.basename == @sample_filename } # all basename is same
-    assert filepaths.map(&:path) == filepaths.map(&:path).uniq        # all path is different
+          assert profiles.all?{ |path| path.class == DuplicatedFilenameChecker::FileProfile }
+          assert profiles.all?{ |path| path.basename == @sample_filename } # all basename is same
+          assert profiles.map(&:path) == profiles.map(&:path).uniq        # all path is different
+        end
+      end
+    end
   end
 end

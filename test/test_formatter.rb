@@ -18,7 +18,7 @@ describe DuplicatedFilenameChecker::Formatter do
 
   describe '#only_basename' do
     it 'show only basenames' do
-      assert @formatter.only_basename == ['duplicate_filename_1.sample', 'duplicate_filename_2.png']
+      assert @formatter.only_basename.sort == ['duplicate_filename_1.sample', 'duplicate_filename_2.png'].sort
     end
   end
 

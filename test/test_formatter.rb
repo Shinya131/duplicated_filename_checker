@@ -12,7 +12,7 @@ describe DuplicatedFilenameChecker::Formatter do
 
   describe '#only_basename' do
     it 'result only duplicate basename' do
-      assert @formatter.only_basename == ['duplicatefilename.sample']
+      assert @formatter.only_basename == ['duplicate_filename.sample']
     end
   end
 end

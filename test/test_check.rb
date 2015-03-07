@@ -1,6 +1,21 @@
 require 'minitest_helper'
 
 describe DuplicatedFilenameChecker::Check do
+  describe '#initialize' do
+
+    describe 'arguments no given.' do
+      it 'raise' do
+        assert_raises(ArgumentError){ DuplicatedFilenameChecker::Check.new }
+      end
+    end
+
+    describe 'survey target  directory is no exists.' do
+      it 'raise' do
+        assert_raises(ArgumentError){ DuplicatedFilenameChecker::Check.new('/not_exists_dir') }
+      end
+    end
+  end
+
   describe '#execute' do
     describe 'survey target has duplicate basename files' do
       before do

@@ -1,5 +1,8 @@
 class DuplicatedFilenameChecker::Check
   def initialize(*check_direcotry_roots)
+    argument_size_validation!(check_direcotry_roots)
+    check_directory_exists_validation!(check_direcotry_roots)
+
     @check_target_paths = check_target_paths_by(check_direcotry_roots)
   end
 
@@ -42,5 +45,19 @@ class DuplicatedFilenameChecker::Check
 
     # exchange to FileProfile
     paths.map{|path| DuplicatedFilenameChecker::FileProfile.new(path) }
+  end
+
+  def argument_size_validation!(check_direcotry_roots)
+    unless check_direcotry_roots.size > 0
+      raise ArgumentError.new('Specify the argument. Argument is survey target root paths.')
+    end
+  end
+
+  def check_directory_exists_validation!(check_direcotry_roots)
+    check_direcotry_roots.each do |dir|
+      unless File.exists?(dir)
+        raise ArgumentError.new("No such directory: #{dir}")
+      end
+    end
   end
 end

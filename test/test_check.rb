@@ -28,8 +28,7 @@ describe DuplicatedFilenameChecker::Check do
       end
 
       it 'key is duplicate filename' do
-        basename = @check_result.keys.first
-        assert basename == @sample_filename
+        assert = @check_result.keys.any?{|basename| basename == @sample_filename }
       end
 
       describe 'value is duplicate file profiles' do

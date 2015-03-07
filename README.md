@@ -15,6 +15,8 @@ install:
     $ gem install duplicated_filename_checker
 
 ## Usage
+### survey duplicate filename
+
 ```
 $ dup-filename ./survey_dir1_root ./survey_dir2_root
 
@@ -35,6 +37,14 @@ $ dup-filename ./survey_dir1_root ./survey_dir2_root
 2. /Users/shinya131/survey_dir2_root/dupfilename2.png
  * md5: 5ca13f9af7db4c8e80ac153fd4c0a552
  * mtime: 2015-03-03 15:14:35 +0900
+
+```
+
+### only filename option: `-l`
+```
+$ dup-filename -l ./survey_dir1_root ./survey_dir2_root
+dupfilename1.png
+dupfilename2.png
 
 ```
 

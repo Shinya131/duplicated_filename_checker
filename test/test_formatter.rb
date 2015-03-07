@@ -11,8 +11,18 @@ describe DuplicatedFilenameChecker::Formatter do
   end
 
   describe '#only_basename' do
-    it 'result only duplicate basename' do
+    it 'show only basenames' do
       assert @formatter.only_basename == ['duplicate_filename.sample']
+    end
+  end
+
+  describe '#exclude_basename' do
+    before do
+      @formatter.exclude_basename('.sample')
+    end
+
+    it 'ignored specified basename' do
+      assert @formatter.only_basename == []
     end
   end
 end

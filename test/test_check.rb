@@ -41,6 +41,7 @@ describe DuplicatedFilenameChecker::Check do
         end
 
         it 'proflies.first all basename is same' do
+          p @profiles
           assert @profiles.first.all?{ |path| @sample_filenames.include? path.basename }
         end
 

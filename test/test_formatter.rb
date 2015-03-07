@@ -30,6 +30,7 @@ describe DuplicatedFilenameChecker::Formatter do
 
     it 'first line has basname' do
       first_line = @formatter.markdown.split("\n")[0]
+      puts @formatter.markdown
       assert first_line =~ /#{@sample_filename}/
     end
 

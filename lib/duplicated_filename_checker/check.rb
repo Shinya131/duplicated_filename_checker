@@ -11,8 +11,8 @@ class DuplicatedFilenameChecker::Check
 
   # select duplicate paths from survey target paths
   def duplicate_paths
-    @survey_target_paths.select do |path|
-      is_duplicate?(path.basename)
+    @survey_target_paths.select do |file|
+      is_duplicate?(file.basename)
     end
   end
 
@@ -29,8 +29,8 @@ class DuplicatedFilenameChecker::Check
 
     @basename_count = Hash.new(0)
 
-    @survey_target_paths.each do |path|
-      @basename_count[path.basename] += 1
+    @survey_target_paths.each do |file|
+      @basename_count[file.basename] += 1
     end
 
     @basename_count

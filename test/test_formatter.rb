@@ -4,7 +4,8 @@ describe DuplicatedFilenameChecker::Formatter do
   before do
     survey_dir_path_1 = './test/sample_for_test/dir_a1'
     survey_dir_path_2 = './test/sample_for_test/dir_b1'
-    @sample_filename  = 'duplicate_filename_1.sample'
+    @sample_filename_1  = 'duplicate_filename_1.sample'
+    @sample_filename_2  = 'duplicate_filename_2.png'
 
     @check_result = DuplicatedFilenameChecker::Check.new(survey_dir_path_1, survey_dir_path_2).execute
     @formatter = DuplicatedFilenameChecker::Formatter.new(@check_result)
@@ -30,8 +31,7 @@ describe DuplicatedFilenameChecker::Formatter do
 
     it 'first line has basname' do
       first_line = @formatter.markdown.split("\n")[0]
-      puts @formatter.markdown
-      assert first_line =~ /#{@sample_filename}/
+      assert first_line =~ /[#{@sample_filename_1}|#{@sample_filename_2}]/
     end
 
     it 'second line has path' do

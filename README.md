@@ -29,7 +29,7 @@ $ dup-filename ./survey_dir1_root ./survey_dir2_root
  * md5: 5b915134b95109c68e7515f4737c5e6d
  * mtime: 2015-03-03 15:14:35 +0900
 
-## dupfilename2.png
+## dupfilename2.dat
 1. /Users/shinya131/survey_dir1_root/dupfilename2.dat
  * md5: 5f524466f49b96221fe7c5a6ddf5d881
  * mtime: 2014-10-16 20:19:07 +0900
@@ -89,7 +89,7 @@ p duplicate_file_profile_list
 #     #<DuplicatedFilenameChecker::FileProfile:0x007f9aa4878188 @file_path=...>,
 #     #<DuplicatedFilenameChecker::FileProfile:0x007f9aa48633a0 @file_path=...>
 #   ],
-#   "dupfilename2.png"=>
+#   "dupfilename2.dat"=>
 #   [
 #     #<DuplicatedFilenameChecker::FileProfile:0x007f9aa4878160 @file_path=...>,
 #     #<DuplicatedFilenameChecker::FileProfile:0x007f9aa4863210 @file_path=...>

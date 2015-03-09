@@ -50,7 +50,7 @@ dupfilename2.dat
 
 ### ignore option: `-i`
 ```
-$ dup-filename -l -i *.dat ./survey_dir1_root ./survey_dir2_root
+$ dup-filename -l -i .dat ./survey_dir1_root ./survey_dir2_root
 dupfilename1.png
 
 ```
